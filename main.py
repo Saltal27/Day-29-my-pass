@@ -22,6 +22,10 @@ def search_data():
                                          "\nYou may want to check if you spelled it correctly,"
                                          " or you You might want to add new info and save it first")
 
+        except FileNotFoundError:
+            messagebox.showerror(title="Oops!",
+                                 message="No data file found")
+
         else:
             messagebox.showinfo(title=website_text.get(),
                                 message=f"Email: {searched_website['Email']}"
@@ -121,31 +125,38 @@ canvas = Canvas(width=200, height=200, highlightthickness=0, background="#E3E5E6
 canvas.create_image(100, 100, image=lock_image)
 canvas.grid(column=1, row=0)
 
+#Lables
 website = Label(text="Website:", background="#E3E5E6")
 website.grid(column=0, row=1)
 website.config(pady=5)
-
-website_text = Entry(width=32)
-website_text.focus()
-website_text.grid(column=1, row=1)
-
-search = Button(text="          Search          ", highlightthickness=0, command=search_data)
-search.grid(column=2, row=1)
 
 email = Label(text="Email/Username:", background="#E3E5E6")
 email.grid(column=0, row=2)
 email.config(pady=5, padx=20)
 
-email_text = Entry(width=50)
-email_text.insert(0, "omarmobarak53@gmail.com")
-email_text.grid(column=1, row=2, columnspan=2)
-
 password = Label(text="Password:", background="#E3E5E6")
 password.grid(column=0, row=3)
 password.config(pady=5)
 
+nothing = Label(background="#E3E5E6")
+nothing.grid(column=0, row=4)
+nothing.config(pady=8)
+
+#Entrys
+website_text = Entry(width=32)
+website_text.focus()
+website_text.grid(column=1, row=1)
+
+email_text = Entry(width=50)
+email_text.insert(0, "example@gmail.com")
+email_text.grid(column=1, row=2, columnspan=2)
+
 password_text = Entry(width=32)
 password_text.grid(column=1, row=3)
+
+#Buttons
+search = Button(text="          Search          ", highlightthickness=0, command=search_data)
+search.grid(column=2, row=1)
 
 generate_password = Button(text="Generate password", highlightthickness=0, command=generate_new_password)
 generate_password.grid(column=2, row=3)
@@ -155,9 +166,5 @@ add.grid(column=1, row=4)
 
 clear = Button(text="    Clear database    ", highlightthickness=0, command=clear_database)
 clear.grid(column=2, row=4)
-
-nothing = Label(background="#E3E5E6")
-nothing.grid(column=0, row=4)
-nothing.config(pady=8)
 
 window.mainloop()
